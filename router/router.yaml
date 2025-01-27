@@ -23,9 +23,16 @@ include_subgraph_errors:
 subscription:
   enabled: true
   mode:
-    passthrough:
-      # docker setup, for local setup comment out the following section
-      subgraphs:
-        products:
-          path: /
+    callback:
+      public_url: https://gh-fernando-apoll-router-979294949369.us-central1.run.app/callback
+      listen: 0.0.0.0:${env.PORT:-4000}
+      path: /callback
+      heartbeat_interval: 15s
+      subgraphs:    
+        - scores
+    # passthrough:
+    #   # docker setup, for local setup comment out the following section
+    #   subgraphs:
+    #     products:
+    #       path: /
 ## Enter Workshop Module Configs Below
